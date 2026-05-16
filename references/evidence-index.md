@@ -137,13 +137,14 @@ The positive smoke prompt asked whether a skill applied for a TypeScript `@earen
 
 The negative smoke prompt asked about translating a paragraph into Japanese. Codex returned `skill_used: false` because the skill is for SDK development and excludes unrelated translation.
 
-Packaging command:
+Final packaging used a clean staging directory containing only `SKILL.md` and `references/`, then ran:
 
 ```bash
-python3 .agents/skills/skill-creator/scripts/package_skill.py . dist
+python3 -m scripts.package_skill /tmp/pi-coding-agent-sdk-package-v2/pi-coding-agent-sdk /tmp/pi-coding-agent-sdk-package-v2-dist
+unzip -l /tmp/pi-coding-agent-sdk-package-v2-dist/pi-coding-agent-sdk.skill
 ```
 
-The package script excludes `evals/` at the skill root and includes `references/`.
+The resulting archive contained exactly five files: `SKILL.md` plus the four `references/` files. It did not include `.git`, `.agents`, `evals/`, or generated cache files.
 
 ## Publishing Evidence
 
