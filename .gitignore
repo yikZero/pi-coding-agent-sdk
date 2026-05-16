@@ -1,0 +1,5 @@
+.agents/
+dist/
+*.skill
+__pycache__/
+.DS_Store

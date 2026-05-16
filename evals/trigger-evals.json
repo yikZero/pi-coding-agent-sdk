@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Build a TypeScript desktop integration using @earendil-works/pi-coding-agent with AgentSessionRuntime and streaming events.",
+    "should_trigger": true
+  },
+  {
+    "query": "My Pi SDK custom skill injection code fails because Skill.source is not assignable. How should I fix it?",
+    "should_trigger": true
+  },
+  {
+    "query": "How do I add a custom tool with defineTool and restrict built-in tools to read and bash in pi-coding-agent?",
+    "should_trigger": true
+  },
+  {
+    "query": "What is the best way to handle AuthStorage and SettingsManager for a pi SDK test harness without writing ~/.pi files?",
+    "should_trigger": true
+  },
+  {
+    "query": "Translate this paragraph into Japanese.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a CSS grid layout for a pricing page.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review this React component for accessibility bugs.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain how OAuth works conceptually without mentioning Pi or pi-coding-agent.",
+    "should_trigger": false
+  }
+]

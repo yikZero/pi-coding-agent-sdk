@@ -1,0 +1,53 @@
+{
+  "skill_name": "pi-skills",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a minimal TypeScript integration with the Pi SDK: create an agent session, stream assistant text to stdout, avoid persistent session storage, and clean up resources at the end.",
+      "expected_output": "The answer should use @earendil-works/pi-coding-agent, AuthStorage, ModelRegistry, createAgentSession, SessionManager.inMemory(), subscribe to message_update text_delta, call prompt(), unsubscribe, and dispose the session.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I want to inject a custom skill through the Pi SDK while keeping the discovered browser/search-related skills. How should I write that?",
+      "expected_output": "The answer should recommend DefaultResourceLoader with skillsOverride, preserve selected current.skills, define a Skill with sourceInfo and disableModelInvocation, call loader.reload(), and pass the loader into createAgentSession().",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I am building a desktop app that needs to support new session, resume, fork, import, cwd changes, and streaming events. Should I use createAgentSession directly or AgentSessionRuntime?",
+      "expected_output": "The answer should choose createAgentSessionRuntime/AgentSessionRuntime, explain cwd-bound service recreation, explain that runtime.session changes after replacement, and mention re-subscribing or using setRebindSession.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "The docs show readTool and bashTool in a Pi SDK example, but my installed package only has createReadTool/createBashTool and tools?: string[]. What should I use?",
+      "expected_output": "The answer should prefer installed package types over stale docs, explain that tools is a string[] allowlist in the current package shape, use names like \"read\" and \"bash\", and only use tool factories when the local API expects raw AgentTool instances.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Show me how to add a custom Pi SDK tool named status and make sure it is available when I also restrict built-in tools to read and bash.",
+      "expected_output": "The answer should use defineTool, TypeBox parameters, customTools: [statusTool], tools: [\"read\", \"bash\", \"status\"], and explain that custom tool names must be included when tools is an allowlist.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "I need to add a virtual prompt template and a virtual AGENTS.md-style context file through the Pi SDK, without writing them to disk. What API should I use?",
+      "expected_output": "The answer should use DefaultResourceLoader with promptsOverride and agentsFilesOverride, define PromptTemplate with sourceInfo and filePath, call loader.reload(), and pass resourceLoader into createAgentSession().",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "How should I manage API keys and settings for a test harness that creates Pi SDK sessions without touching the user's real ~/.pi files?",
+      "expected_output": "The answer should use AuthStorage.inMemory(), ModelRegistry.inMemory(), SettingsManager.inMemory(), SessionManager.inMemory(), runtime API key overrides from env vars, and avoid hardcoded secrets.",
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "My Pi SDK host app sends a prompt while the session is already streaming and it crashes. What should the integration do instead?",
+      "expected_output": "The answer should explain session.isStreaming, steer vs followUp, prompt(..., { streamingBehavior }), queue_update events, and when to call session.steer() or session.followUp().",
+      "files": []
+    }
+  ]
+}
