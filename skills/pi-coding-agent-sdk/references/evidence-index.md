@@ -114,11 +114,11 @@ The same scripts were run with `npx tsx <file>` far enough to create and dispose
 Local validation commands:
 
 ```bash
-python3 .agents/skills/skill-creator/scripts/quick_validate.py .
+python3 .agents/skills/skill-creator/scripts/quick_validate.py skills/pi-coding-agent-sdk
 python3 -m json.tool evals/evals.json
-rg -n "[^\\x00-\\x7F]" SKILL.md references evals/evals.json
+rg -n "[^\\x00-\\x7F]" skills/pi-coding-agent-sdk evals/evals.json
 npx skills add ./ --list
-python3 -m scripts.run_eval --eval-set evals/trigger-evals.json --skill-path . --num-workers 2 --timeout 25 --runs-per-query 3 --trigger-threshold 0.5 --verbose
+python3 -m scripts.run_eval --eval-set evals/trigger-evals.json --skill-path skills/pi-coding-agent-sdk --num-workers 2 --timeout 25 --runs-per-query 3 --trigger-threshold 0.5 --verbose
 ```
 
 Trigger evaluation note: `skill-creator` trigger eval is stochastic. The best 3-run sample after description optimization passed 7/8 checks: all four negative examples had `0/3` triggers, while three of four positive examples crossed the 0.5 threshold. The remaining positive case triggered `1/3`. This was treated as a useful warning, not as a replacement for the stronger package/type/source validation above.
