@@ -107,7 +107,7 @@ The following temporary files were written under `/tmp/pi-sdk-check` and compile
 
 The same scripts were run with `npx tsx <file>` far enough to create and dispose sessions without sending LLM prompts.
 
-`load-current-skill.ts` loaded `/Users/yikzero/Code/pi-skills` through Pi's own `loadSkillsFromDir()` and returned `skills: ["pi-skills"]` with no diagnostics.
+`load-current-skill.ts` loaded the checked-out skill directory through Pi's own `loadSkillsFromDir()` and returned the current skill name with no diagnostics.
 
 ## Skill Package Validation
 
@@ -118,10 +118,24 @@ python3 .agents/skills/skill-creator/scripts/quick_validate.py .
 python3 -m json.tool evals/evals.json
 rg -n "[^\\x00-\\x7F]" SKILL.md references evals/evals.json
 npx skills add ./ --list
-python3 -m scripts.run_eval --eval-set /Users/yikzero/Code/pi-skills/evals/trigger-evals.json --skill-path /Users/yikzero/Code/pi-skills --num-workers 2 --timeout 25 --runs-per-query 3 --trigger-threshold 0.5 --verbose
+python3 -m scripts.run_eval --eval-set evals/trigger-evals.json --skill-path . --num-workers 2 --timeout 25 --runs-per-query 3 --trigger-threshold 0.5 --verbose
 ```
 
 Trigger evaluation note: `skill-creator` trigger eval is stochastic. The best 3-run sample after description optimization passed 7/8 checks: all four negative examples had `0/3` triggers, while three of four positive examples crossed the 0.5 threshold. The remaining positive case triggered `1/3`. This was treated as a useful warning, not as a replacement for the stronger package/type/source validation above.
+
+After renaming the skill to `pi-coding-agent-sdk`, a follow-up trigger eval returned `0/3` for every positive case. A direct `claude -p` probe in the same environment then failed with `You've hit your limit`, while `run_eval.py` suppresses child-process stderr and records failed child runs as `False`. Treat that post-rename trigger sample as inconclusive quota noise, not a validated trigger regression.
+
+Codex smoke tests were run after installing the clean staged skill package into the project-level Codex skill directory with:
+
+```bash
+npx skills add /tmp/pi-coding-agent-sdk-clean2/pi-coding-agent-sdk --agent codex --skill pi-coding-agent-sdk -y
+codex exec --json --ephemeral --sandbox read-only -C /Users/yikzero/Code/pi-coding-agent-sdk "<positive smoke prompt>"
+codex exec --json --ephemeral --sandbox read-only -C /Users/yikzero/Code/pi-coding-agent-sdk "<negative smoke prompt>"
+```
+
+The positive smoke prompt asked whether a skill applied for a TypeScript `@earendil-works/pi-coding-agent` integration using `AgentSessionRuntime` and streaming events. Codex selected `pi-coding-agent-sdk` and read `.agents/skills/pi-coding-agent-sdk/SKILL.md`.
+
+The negative smoke prompt asked about translating a paragraph into Japanese. Codex returned `skill_used: false` because the skill is for SDK development and excludes unrelated translation.
 
 Packaging command:
 

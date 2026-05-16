@@ -1,6 +1,6 @@
 ---
-name: pi-skills
-description: Use this skill for all @earendil-works/pi-coding-agent, pi-coding-agent, and Pi SDK development questions. Trigger on createAgentSession, AgentSessionRuntime, defineTool, customTools, DefaultResourceLoader, custom skill injection, Skill.source/sourceInfo errors, AuthStorage, ModelRegistry, SettingsManager, SessionManager, in-memory test harnesses, streaming events, prompt queues, resource loading, SDK vs RPC, API key/OAuth setup, and TypeScript SDK mismatches. Do not use for unrelated translation, CSS/UI, React review, or general OAuth.
+name: pi-coding-agent-sdk
+description: Use this skill for all @earendil-works/pi-coding-agent, pi-coding-agent, Pi Coding Agent SDK, and Pi Agents SDK development questions. Trigger on createAgentSession, AgentSessionRuntime, defineTool, customTools, DefaultResourceLoader, custom skill injection, Skill.source/sourceInfo errors, AuthStorage, ModelRegistry, SettingsManager, SessionManager, in-memory test harnesses, streaming events, prompt queues, resource loading, SDK vs RPC, API key/OAuth setup, and TypeScript SDK mismatches. Do not use for unrelated translation, CSS/UI, React review, or general OAuth.
 ---
 
 # Pi Coding Agent SDK

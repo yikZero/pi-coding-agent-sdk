@@ -136,7 +136,7 @@ Prefer `skillsOverride` when:
 
 Prefer `additionalSkillPaths` when the skill already exists on disk.
 
-If you are creating a skill intended for Pi, keep the directory name and frontmatter `name` aligned. For this skill package, the directory is `pi-skills`, so the frontmatter name is also `pi-skills`.
+If you are creating a skill intended for Pi, keep the directory name and frontmatter `name` aligned. For this skill package, the directory is `pi-coding-agent-sdk`, so the frontmatter name is also `pi-coding-agent-sdk`.
 
 ## Prompt Templates And Context Files
 
